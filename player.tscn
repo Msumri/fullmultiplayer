@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://cpugs0w00wvik"]
+
+[ext_resource type="Script" uid="uid://ub3xqfmj53gi" path="res://player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://dpojinjc3c67y" path="res://assets/sprite2.png" id="2_i3pqv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0rpm"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c6xj6"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(17, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxmxl"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(34, 0, 16, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bw2v"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(0, 13, 16, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kem5a"]
+atlas = ExtResource("2_i3pqv")
+region = Rect2(17, 13, 16, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxmxl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0rpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6xj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxmxl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c6xj6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bw2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kem5a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n4w22"]
+radius = 4.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:scale")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("AnimatedSprite2D:speed_scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+
+[node name="player" type="CharacterBody2D" unique_id=1043116580]
+script = ExtResource("1_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=908499694]
+sprite_frames = SubResource("SpriteFrames_gxmxl")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1069445868]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_n4w22")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=203262960]
+replication_config = SubResource("SceneReplicationConfig_onrkg")
