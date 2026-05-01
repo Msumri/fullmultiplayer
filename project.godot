@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Server="*uid://bfu0vtfwf8teo"
 
+[global_group]
+
+player=""
+
 [input]
 
 left={
